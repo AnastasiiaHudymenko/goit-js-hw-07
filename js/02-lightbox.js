@@ -1,11 +1,6 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-console.log(galleryItems);
-new SimpleLightbox(".some-element a", {
-  /* options */
-});
-
 const mainContainerGalleryRef = document.querySelector(".gallery");
 
 function createGalleryCardEl(galleres) {
@@ -20,3 +15,8 @@ function createGalleryCardEl(galleres) {
 
 const galleryCard = createGalleryCardEl(galleryItems);
 mainContainerGalleryRef.insertAdjacentHTML("beforeend", galleryCard);
+
+var lightbox = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
+});

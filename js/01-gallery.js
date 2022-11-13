@@ -1,7 +1,7 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-const mainDivContainerRef = document.querySelector(".gallery");
+const gallery = document.querySelector(".gallery");
 
 function createGalleryCardEl(galleres) {
   return galleres
@@ -18,21 +18,26 @@ function createGalleryCardEl(galleres) {
     .join("");
 }
 const galleryCard = createGalleryCardEl(galleryItems);
-mainDivContainerRef.insertAdjacentHTML("beforeend", galleryCard);
+gallery.insertAdjacentHTML("beforeend", galleryCard);
 
-mainDivContainerRef.addEventListener("click", (e) => {
+gallery.addEventListener("click", (e) => {
   const imgSrcOriginal = e.target.dataset.source;
   if (e.target.nodeName === "A" || imgSrcOriginal === imgSrcOriginal) {
     e.preventDefault();
   }
-  if (e.target === mainDivContainerRef) {
+  if (e.target === gallery) {
     return;
   }
-  basicLightbox
-    .create(
-      `
-		<img width="1400" height="900" src="${imgSrcOriginal}">
-	`
-    )
-    .show();
+
+  const instance = basicLightbox.create(
+    `<img width="1400" height="900" src="${imgSrcOriginal}">`
+  );
+
+  instance.show();
+
+  gallery.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      instance.close();
+    }
+  });
 });
