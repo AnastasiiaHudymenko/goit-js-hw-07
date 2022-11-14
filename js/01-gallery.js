@@ -21,23 +21,33 @@ const galleryCard = createGalleryCardEl(galleryItems);
 gallery.insertAdjacentHTML("beforeend", galleryCard);
 
 gallery.addEventListener("click", (e) => {
+  e.preventDefault();
   const imgSrcOriginal = e.target.dataset.source;
-  if (e.target.nodeName === "A" || imgSrcOriginal === imgSrcOriginal) {
-    e.preventDefault();
-  }
+
   if (e.target === gallery) {
     return;
   }
 
   const instance = basicLightbox.create(
-    `<img width="1400" height="900" src="${imgSrcOriginal}">`
+    `<img width="1400" height="900" src="${imgSrcOriginal}">`,
+    {
+      onShow: (instance) => {
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            instance.close();
+          }
+        });
+      },
+      onClose: (instance) => {
+        document.removeEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            instance.close();
+          }
+          gallery.removeEventListener("click");
+        });
+      },
+    }
   );
 
   instance.show();
-
-  gallery.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      instance.close();
-    }
-  });
 });

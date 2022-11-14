@@ -16,7 +16,7 @@ function createGalleryCardEl(galleres) {
 const galleryCard = createGalleryCardEl(galleryItems);
 mainContainerGalleryRef.insertAdjacentHTML("beforeend", galleryCard);
 
-var lightbox = new SimpleLightbox(".gallery a", {
+const lightbox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionDelay: 250,
 });
