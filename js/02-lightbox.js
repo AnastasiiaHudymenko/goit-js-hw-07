@@ -1,5 +1,4 @@
 import { galleryItems } from "./gallery-items.js";
-// Change code below this line
 
 const mainContainerGalleryRef = document.querySelector(".gallery");
 
@@ -13,8 +12,10 @@ function createGalleryCardEl(galleres) {
     .join("");
 }
 
-const galleryCard = createGalleryCardEl(galleryItems);
-mainContainerGalleryRef.insertAdjacentHTML("beforeend", galleryCard);
+mainContainerGalleryRef.insertAdjacentHTML(
+  "beforeend",
+  createGalleryCardEl(galleryItems)
+);
 
 const lightbox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
